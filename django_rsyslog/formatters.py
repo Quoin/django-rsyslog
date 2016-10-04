@@ -44,7 +44,7 @@ class DjangoSyslogJsonFormatter(Rfc3164JsonFormatter):
 
         return '{method} {path}\nHTTP Headers:\n  {headers}\nPOST:\n  {params}'.format(
             method=request.method,
-            path=request.path,
+            path=request.get_full_path(),
             headers='\n  '.join(['%s: %s' % (re.sub('HTTP_', '', k), v)
                                  for k, v in http_headers.items()]),
             params='\n  '.join(['%s: %s' % (k, v) for k, v in clean_post.items()]) or 'None')
